@@ -16,7 +16,9 @@ In H2O project we have identified 4 fields of improvement:
 -Preventing underground water pollution by corporation and factories
 -Increasing awareness among developed nations to save and respect water
 
-You may find more information on the H2O website: http://h2oproject.co
+*****Update June 3rd 2018****
+In an effort to make this coin a success and allow it reach it's true potential the community has taken control of this code.
+We will be releasing more information about this coin soon.
 
 License
 -------
