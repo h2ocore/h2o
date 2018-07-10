@@ -127,9 +127,15 @@ public:
 //        vFixedSeeds.clear();
 //        vSeeds.clear();
 
-        vSeeds.push_back(CDNSSeedData("h2oproject.co", "se1.h2oproject.co"));
-        vSeeds.push_back(CDNSSeedData("h2oproject.co", "se2.h2oproject.co"));
-        vSeeds.push_back(CDNSSeedData("h2oproject.co", "se3.h2oproject.co"));
+        vSeeds.push_back(CDNSSeedData("se1.h2ocore.org", "se1.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se2.h2ocore.org", "se2.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se3.h2ocore.org", "se3.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se4.h2ocore.org", "se4.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se5.h2ocore.org", "se5.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se6.h2ocore.org", "se6.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se7.h2ocore.org", "se7.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se8.h2ocore.org", "se8.h2ocore.org"));
+        vSeeds.push_back(CDNSSeedData("se9.h2ocore.org", "se9.h2ocore.org"));
 
         // H2O addresses start with 'H'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,41);
