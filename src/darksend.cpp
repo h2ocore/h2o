@@ -2268,7 +2268,7 @@ bool CDarkSendSigner::IsVinAssociatedWithPubkey(const CTxIn& txin, const CPubKey
     uint256 hash;
     if(GetTransaction(txin.prevout.hash, tx, Params().GetConsensus(), hash, true)) {
         BOOST_FOREACH(CTxOut out, tx.vout)
-            if(out.nValue == 1000*COIN && out.scriptPubKey == payee) return true;
+            if(out.nValue == Params().MasternodeCollateralAmt()*COIN && out.scriptPubKey == payee) return true;
     }
 
     return false;

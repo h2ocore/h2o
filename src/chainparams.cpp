@@ -82,8 +82,8 @@ public:
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.nMajorityEnforceBlockUpgrade = 750;
-        consensus.nMajorityRejectBlockOutdated = 950;
+        consensus.nMajorityEnforceBlockUpgrade = 510;
+        consensus.nMajorityRejectBlockOutdated = 750;
         consensus.nMajorityWindow = 1000;
         consensus.BIP34Height = 0; // from the start
         consensus.BIP34Hash = uint256S("0x00000ed71b05737fed83319d001be6f2361f67052967c2fc05e9df5890d2b0e6");
@@ -227,6 +227,7 @@ public:
         nDefaultPort = 14466;
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
+        nMasternodeCollateralAmt=15000; //masternode collateral
 
         genesis = CreateGenesisBlock(1526155205, 888158, 0x1e0ffff0, 1, 10 * COIN);
 

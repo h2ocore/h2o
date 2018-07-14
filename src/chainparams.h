@@ -81,6 +81,9 @@ public:
     int FulfilledRequestExpireTime() const { return nFulfilledRequestExpireTime; }
     std::string SporkPubKey() const { return strSporkPubKey; }
     std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
+    //Central Collateral Amount
+    int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
+
 protected:
     CChainParams() {}
 
@@ -89,6 +92,7 @@ protected:
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
+    int nMasternodeCollateralAmt;
     long nMaxTipAge;
     uint64_t nPruneAfterHeight;
     std::vector<CDNSSeedData> vSeeds;
