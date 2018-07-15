@@ -116,6 +116,8 @@ public:
         nDefaultPort = 13355;
         nMaxTipAge = 6 * 60 * 60;
         nPruneAfterHeight = 100000;
+        nMasternodeCollateralAmt=15000; //masternode collateral
+
 
         genesis = CreateGenesisBlock(1526155200, 709788, 0x1e0ffff0, 1, 10 * COIN);
 
