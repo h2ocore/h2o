@@ -2135,9 +2135,6 @@ void RelayTransaction(const CTransaction& tx, const CDataStream& ss)
 }
 
 void RelayInv(CInv &inv, const int minProtoVersion) {
-    //get the current height SAC
-    int nBestHeight = g_signals.GetHeight().get_value_or(0);
-
     LOCK(cs_vNodes);
     BOOST_FOREACH(CNode* pnode, vNodes)
         if(pnode->nVersion >= minProtoVersion)
