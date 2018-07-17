@@ -23,7 +23,7 @@ static const int GETHEADERS_VERSION = 70077;
 static const int MIN_PEER_PROTO_VERSION = 70208;
 
 //Minimum protocol to enforce at specified block
-static const int MIN_PEER_PROTO_VERSION_BLOCK = 70209
+static const int MIN_PEER_PROTO_VERSION_AT_BLOCK = 70209
 //Speficified block to enforce MIN version
 static const int MIN_PEER_PROTO_VERSION_BLOCK_NUM = 55000
 
