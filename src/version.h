@@ -22,12 +22,6 @@ static const int GETHEADERS_VERSION = 70077;
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = 70208;
 
-//Minimum protocol to enforce at specified block
-static const int MIN_PEER_PROTO_VERSION_BLOCK = 70209
-//Speficified block to enforce MIN version
-static const int MIN_PEER_PROTO_VERSION_BLOCK_NUM = 55000
-
-
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
 static const int CADDR_TIME_VERSION = 31402;
