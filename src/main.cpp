@@ -1768,8 +1768,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         nSubsidy = 180 * COIN; // Step 8
     }else if (nPrevHeight < 10080){
         nSubsidy = 250 * COIN; // Step 9
+    }else if (nPrevHeight < 55000){
+        nSubsidy = 300 * COIN; // Orginal Dev Final Step
     }else{
-        nSubsidy = 300 * COIN; // Final step
+        nSubsidy = 150 * COIN; //Reduce the coins to stabilize the ROI 
     }
     
 
@@ -1784,7 +1786,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
 
-    CAmount ret = blockValue*90/100;
+    CAmount ret = blockValue*75/100;
 
     return ret;
 }
