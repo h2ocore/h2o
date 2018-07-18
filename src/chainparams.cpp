@@ -118,7 +118,7 @@ public:
         nPruneAfterHeight = 100000;
 
         nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
-        nMasternodeCollateralAmtNew = 5000;  // New masternode collateral activated by SPORK15
+        nMasternodeCollateralAmtNew = 15000; // New masternode collateral activated by SPORK15
 
         genesis = CreateGenesisBlock(1526155200, 709788, 0x1e0ffff0, 1, 10 * COIN);
 
@@ -232,7 +232,7 @@ public:
         nPruneAfterHeight = 1000;
 
         nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
-        nMasternodeCollateralAmtNew = 5000;  // New masternode collateral activated by SPORK15
+        nMasternodeCollateralAmtNew = 15000; // New masternode collateral activated by SPORK15
 
         genesis = CreateGenesisBlock(1526155205, 888158, 0x1e0ffff0, 1, 10 * COIN);
 
