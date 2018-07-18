@@ -82,11 +82,8 @@ public:
     std::string SporkPubKey() const { return strSporkPubKey; }
     std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
     //Central Collateral Amount
-    int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
-     //Original and New Masternode Collateral Amounts spork 15
-    const int MasternodeCollateralAmtOld = 1000;
-    const int MasternodeCollateralAmtNew = 15000;
-
+    int MasternodeCollateralAmtOld() const { return nMasternodeCollateralAmtOld; }
+    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
 
 protected:
     CChainParams() {}
@@ -96,7 +93,8 @@ protected:
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
-    int nMasternodeCollateralAmt;
+    int nMasternodeCollateralAmtOld;
+    int nMasternodeCollateralAmtNew;
     long nMaxTipAge;
     uint64_t nPruneAfterHeight;
     std::vector<CDNSSeedData> vSeeds;

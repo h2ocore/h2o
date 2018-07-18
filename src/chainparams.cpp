@@ -116,8 +116,9 @@ public:
         nDefaultPort = 13355;
         nMaxTipAge = 6 * 60 * 60;
         nPruneAfterHeight = 100000;
-        nMasternodeCollateralAmt=ActiveCollateral(); //masternode collateral
 
+        nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
+        nMasternodeCollateralAmtNew = 5000;  // New masternode collateral activated by SPORK15
 
         genesis = CreateGenesisBlock(1526155200, 709788, 0x1e0ffff0, 1, 10 * COIN);
 
@@ -229,7 +230,9 @@ public:
         nDefaultPort = 14466;
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
-        nMasternodeCollateralAmt=ActiveCollateral(); //masternode collateral
+
+        nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
+        nMasternodeCollateralAmtNew = 5000;  // New masternode collateral activated by SPORK15
 
         genesis = CreateGenesisBlock(1526155205, 888158, 0x1e0ffff0, 1, 10 * COIN);
 
@@ -390,21 +393,4 @@ void SelectParams(const std::string& network)
 {
     SelectBaseParams(network);
     pCurrentParams = &Params(network);
-}
-
-int ActiveCollateral()
-{
-
-    // SPORK_15 
-    
-/*
-    if (IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
-        return MasternodeCollateralAmtNew; //new collateral
-    }
-
-    return MasternodeCollateralAmtOld; //old collateral 
-*/
-
-
-
 }

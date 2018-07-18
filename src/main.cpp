@@ -6328,19 +6328,24 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-
     // SPORK_16 was used for 70209. Leave it 'ON' so they don't see < 70209 nodes. They won't react to SPORK_15
     // messages because it's not in their code
-/*
-    if (IsSporkActive(SPORK_16_PROTOCOL_VER_ENFORCEMENT)) {
+    if (sporkManager.IsSporkActive(SPORK_16_PROTOCOL_VER_ENFORCEMENT)) {
         return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     }
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
-*/
-
 }
 
+
+int ActiveCollateral()
+{
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
+        return Params().MasternodeCollateralAmtNew();
+    }
+
+    return Params().MasternodeCollateralAmtOld();
+}
 
 
 // requires LOCK(cs_vRecvMsg)
