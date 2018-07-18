@@ -5299,12 +5299,12 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+        if (pfrom->nVersion < ActiveProtocol())
         {
             // disconnect from peers older than this proto version
             LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
             pfrom->PushMessage(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
-                               strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION));
+                               strprintf("Version must be %d or greater", ActiveProtocol()));
             pfrom->fDisconnect = true;
             return false;
         }
@@ -6321,6 +6321,27 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
     return true;
 }
+
+// Note: whenever a protocol update is needed toggle between both implementations (comment out the formerly active one)
+//       so we can leave the existing clients untouched (old SPORK will stay on so they don't see even older clients). 
+//       Those old clients won't react to the changes of the other (new) SPORK because at the time of their implementation
+//       it was the one which was commented out
+int ActiveProtocol()
+{
+
+    // SPORK_16 was used for 70209. Leave it 'ON' so they don't see < 70209 nodes. They won't react to SPORK_15
+    // messages because it's not in their code
+/*
+    if (IsSporkActive(SPORK_16_PROTOCOL_VER_ENFORCEMENT)) {
+        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+    }
+
+    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+*/
+
+}
+
+
 
 // requires LOCK(cs_vRecvMsg)
 bool ProcessMessages(CNode* pfrom)

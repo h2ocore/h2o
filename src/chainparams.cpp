@@ -116,7 +116,7 @@ public:
         nDefaultPort = 13355;
         nMaxTipAge = 6 * 60 * 60;
         nPruneAfterHeight = 100000;
-        nMasternodeCollateralAmt=15000; //masternode collateral
+        nMasternodeCollateralAmt=ActiveCollateral(); //masternode collateral
 
 
         genesis = CreateGenesisBlock(1526155200, 709788, 0x1e0ffff0, 1, 10 * COIN);
@@ -229,7 +229,7 @@ public:
         nDefaultPort = 14466;
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
-        nMasternodeCollateralAmt=15000; //masternode collateral
+        nMasternodeCollateralAmt=ActiveCollateral(); //masternode collateral
 
         genesis = CreateGenesisBlock(1526155205, 888158, 0x1e0ffff0, 1, 10 * COIN);
 
@@ -361,6 +361,8 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
         // Regtest H2O BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE]  = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
+
+
    }
 };
 static CRegTestParams regTestParams;
@@ -388,4 +390,21 @@ void SelectParams(const std::string& network)
 {
     SelectBaseParams(network);
     pCurrentParams = &Params(network);
+}
+
+int ActiveCollateral()
+{
+
+    // SPORK_15 
+    
+/*
+    if (IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
+        return MasternodeCollateralAmtNew; //new collateral
+    }
+
+    return MasternodeCollateralAmtOld; //old collateral 
+*/
+
+
+
 }

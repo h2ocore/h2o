@@ -83,6 +83,10 @@ public:
     std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
     //Central Collateral Amount
     int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
+     //Original and New Masternode Collateral Amounts spork 15
+    const int MasternodeCollateralAmtOld = 1000;
+    const int MasternodeCollateralAmtNew = 15000;
+
 
 protected:
     CChainParams() {}

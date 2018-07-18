@@ -224,6 +224,8 @@ bool LoadBlockIndex();
 /** Unload database information */
 void UnloadBlockIndex();
 /** Process protocol messages received from a given node */
+int ActiveProtocol();
+/** Process protocol messages received from a given node */
 bool ProcessMessages(CNode* pfrom);
 /**
  * Send queued protocol messages to be sent to a give node.
