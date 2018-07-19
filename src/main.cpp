@@ -1786,7 +1786,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
 
-    CAmount ret = blockValue*75/100;
+    CAmount ret = blockValue * ActiveRewards() /100;
 
     return ret;
 }
@@ -6345,6 +6345,15 @@ int ActiveCollateral()
     }
 
     return Params().MasternodeCollateralAmtOld();
+}
+
+int ActiveRewards()
+{
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
+        return Params().MasternodeRewardsNew();
+    }
+
+    return Params().MasternodeRewardsOld();
 }
 
 

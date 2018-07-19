@@ -84,6 +84,8 @@ public:
     //Central Collateral Amount
     int MasternodeCollateralAmtOld() const { return nMasternodeCollateralAmtOld; }
     int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
+    int MasternodeRewardsOld() const { return nMasternodeRewardsOld; }
+    int MasternodeRewardsNew() const {return nMasternodeRewardsNew; }
 
 protected:
     CChainParams() {}
@@ -112,6 +114,8 @@ protected:
     int nFulfilledRequestExpireTime;
     std::string strSporkPubKey;
     std::string strMasternodePaymentsPubKey;
+    int nMasternodeRewardsOld;
+    int nMasternodeRewardsNew;
 };
 
 /**

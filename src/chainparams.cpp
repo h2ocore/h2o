@@ -124,6 +124,10 @@ public:
         nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
         nMasternodeCollateralAmtNew = 15000; // New masternode collateral activated by SPORK15
 
+        nMasternodeRewardsOld = 90; // Original masternode rewards %
+        nMasternodeRewardsNew = 75; //New masternode rewards % activated by SPORK 15
+
+
         genesis = CreateGenesisBlock(1526155200, 709788, 0x1e0ffff0, 1, 10 * COIN);
 
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -245,6 +249,9 @@ public:
 
         nMasternodeCollateralAmtOld = 1000;  // Original masternode collateral
         nMasternodeCollateralAmtNew = 15000; // New masternode collateral activated by SPORK15
+
+        nMasternodeRewardsOld = 90; // Original masternode rewards %
+        nMasternodeRewardsNew = 75; //New masternode rewards % activated by SPORK 15
 
         genesis = CreateGenesisBlock(1526155205, 888158, 0x1e0ffff0, 1, 10 * COIN);
 
