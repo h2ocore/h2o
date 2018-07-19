@@ -112,7 +112,11 @@ public:
         pchMessageStart[1] = 0xc4;
         pchMessageStart[2] = 0xcb;
         pchMessageStart[3] = 0x4a;
-        vAlertPubKey = ParseHex("046801202c9a170b64782f18ae9e862749c0bc541809f064010feb957550adbb18f20305266cd81dd89be3bfb58e67e2f61e27a4426baed3ee0bb2d60fb0b22df0");
+
+		// 2018-07-19	New key is generated for the Mainnet
+        //vAlertPubKey = ParseHex("046801202c9a170b64782f18ae9e862749c0bc541809f064010feb957550adbb18f20305266cd81dd89be3bfb58e67e2f61e27a4426baed3ee0bb2d60fb0b22df0");
+        vAlertPubKey = ParseHex("045bdcc9e51a8fa56602b6f7c110043dc5224759cabfcfffac8849b114456eb6e7fa1b13a3c67c87387c050502f12985c0d7646ac1993bf6561cc1c94de7c57d59");
+
         nDefaultPort = 13355;
         nMaxTipAge = 6 * 60 * 60;
         nPruneAfterHeight = 100000;
@@ -161,7 +165,11 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
-        strSporkPubKey = "043ed47a1aeccaa993c2efa2e9ed351c59e43da97a1f69cff54d14d2aeaa93aced75416a675ff4818a4b23fe8c7712a7514f4956164eb89deb711cd791701a4800";
+
+		// 2018-07-19	New key is generated for the Mainnet
+        // strSporkPubKey = "043ed47a1aeccaa993c2efa2e9ed351c59e43da97a1f69cff54d14d2aeaa93aced75416a675ff4818a4b23fe8c7712a7514f4956164eb89deb711cd791701a4800";
+        strSporkPubKey = "042e1556161c046d2f35fa3625e0e27dc07db4c594ddc463f604e9ef871609c7f923ce779538f5d1e97880768be4cbe0bf260b0e017d99d5d1e230f264bd25b90c";
+
         strMasternodePaymentsPubKey = "043ed47a1aeccaa993c2efa2e9ed351c59e43da97a1f69cff54d14d2aeaa93aced75416a675ff4818a4b23fe8c7712a7514f4956164eb89deb711cd791701a4800";
 
         checkpointData = (CCheckpointData) {
@@ -226,7 +234,11 @@ public:
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0x6c;
-        vAlertPubKey = ParseHex("04723eaccf0aad74336d9538d89c80a599c407cbc5a1da6e5e39c83d35d1045e3da90c059551ae52bdf31d409d98f1f74828939bac5629b3de7d2988a28a6253a2");
+
+		// 2018-07-19	New key is generated for the Testnet
+        //vAlertPubKey = ParseHex("04723eaccf0aad74336d9538d89c80a599c407cbc5a1da6e5e39c83d35d1045e3da90c059551ae52bdf31d409d98f1f74828939bac5629b3de7d2988a28a6253a2");
+        vAlertPubKey = ParseHex("04cc03608ff68f3b914312ddf7a8abcc777a78c53538225cbda5cc86c59f02856a7d5f1fc861b4b6f461bb87312db3875e8350eabb728fcfe7f99441cfab12a22e");
+
         nDefaultPort = 14466;
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
@@ -266,8 +278,12 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 5*60; // fulfilled requests expire in 5 minutes
-        strSporkPubKey = "04a38cdfb6d7ac17632b0fe6a698ca4861ffddc258299fd24d18891a5deda36a5b4c5c81ca953bb8e9d7e78567b9536a0b8b33dedfa758037cff910d81219754a5";
-        strMasternodePaymentsPubKey = "04a38cdfb6d7ac17632b0fe6a698ca4861ffddc258299fd24d18891a5deda36a5b4c5c81ca953bb8e9d7e78567b9536a0b8b33dedfa758037cff910d81219754a5";
+
+		// 2018-07-19	New key is generated for the Testnet
+        //strSporkPubKey = "04a38cdfb6d7ac17632b0fe6a698ca4861ffddc258299fd24d18891a5deda36a5b4c5c81ca953bb8e9d7e78567b9536a0b8b33dedfa758037cff910d81219754a5";
+        strSporkPubKey = "04c409c5b56eb495aafa0ee01f2dad7db3748228d2fc64ef72b5496f7e36ea8af0e88d72510160f7f95b1b77f1ab9b72696b9b17659b370562d73514b672eaed5b";
+        
+		strMasternodePaymentsPubKey = "04a38cdfb6d7ac17632b0fe6a698ca4861ffddc258299fd24d18891a5deda36a5b4c5c81ca953bb8e9d7e78567b9536a0b8b33dedfa758037cff910d81219754a5";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
