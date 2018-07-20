@@ -170,7 +170,7 @@ public:
         strNetworkID = "test";
 		
         consensus.nSubsidyHalvingInterval                                  = 131400; // 1/2 of the year
-        consensus.nMasternodePaymentsStartBlock                            = 720; //
+        consensus.nMasternodePaymentsStartBlock                            = 500; //
         consensus.nMasternodePaymentsIncreaseBlock                         = 500000000; // not used
         consensus.nMasternodePaymentsIncreasePeriod                        = 500000000; // not used
         consensus.nInstantSendKeepLock                                     = 6;
