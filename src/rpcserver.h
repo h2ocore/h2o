@@ -228,6 +228,7 @@ extern UniValue movecmd(const UniValue& params, bool fHelp);
 extern UniValue sendfrom(const UniValue& params, bool fHelp);
 extern UniValue sendmany(const UniValue& params, bool fHelp);
 extern UniValue addmultisigaddress(const UniValue& params, bool fHelp);
+extern UniValue makekeypair(const UniValue& params, bool fHelp);
 extern UniValue createmultisig(const UniValue& params, bool fHelp);
 extern UniValue listreceivedbyaddress(const UniValue& params, bool fHelp);
 extern UniValue listreceivedbyaccount(const UniValue& params, bool fHelp);
@@ -251,7 +252,6 @@ extern UniValue getblockchaininfo(const UniValue& params, bool fHelp);
 extern UniValue getnetworkinfo(const UniValue& params, bool fHelp);
 extern UniValue setmocktime(const UniValue& params, bool fHelp);
 extern UniValue resendwallettransactions(const UniValue& params, bool fHelp);
-extern UniValue makekeypair(const UniValue& params, bool fHelp);
 
 extern UniValue getrawtransaction(const UniValue& params, bool fHelp); // in rcprawtransaction.cpp
 extern UniValue listunspent(const UniValue& params, bool fHelp);
