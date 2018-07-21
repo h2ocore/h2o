@@ -5956,6 +5956,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     std::string strError = "invalid header received " + header.GetHash().ToString();
                     return error(strError.c_str());
                 }
+				
+                //disconnect this node if its old protocol version
+                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             }
         }
 
@@ -6046,6 +6049,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 LOCK(cs_main);
                 Misbehaving(pfrom->GetId(), nDoS);
             }
+			
+			//disconnect this node if its old protocol version
+			pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
         }
 
     }

@@ -15,6 +15,7 @@
 #include "chainparams.h"
 #include "clientversion.h"
 #include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "crypto/common.h"
 #include "hash.h"
 #include "primitives/transaction.h"
@@ -472,7 +473,7 @@ bool CNode::DisconnectOldProtocol(int nVersionRequired, string strLastCommand)
     fDisconnect = false;
     if (nVersion < nVersionRequired) {
         LogPrintf("%s : peer=%d using obsolete version %i; disconnecting\n", __func__, id, nVersion);
-        PushMessage("reject", strLastCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater", ActiveProtocol()));
+		PushMessage(NetMsgType::REJECT, strLastCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater", ActiveProtocol()));
         fDisconnect = true;
     }
 
