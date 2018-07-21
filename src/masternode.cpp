@@ -507,10 +507,11 @@ bool CMasternodeBroadcast::SimpleCheck(int& nDos)
         nActiveState = MASTERNODE_EXPIRED;
     }
 
-    if(nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) {
-        LogPrintf("CMasternodeBroadcast::SimpleCheck -- ignoring outdated Masternode: masternode=%s  nProtocolVersion=%d\n", vin.prevout.ToStringShort(), nProtocolVersion);
-        return false;
-    }
+    // * Disabled to avoid the EXPIRED stated on the old version after the activation of the SPORK 10
+    //if(nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) {
+    //    LogPrintf("CMasternodeBroadcast::SimpleCheck -- ignoring outdated Masternode: masternode=%s  nProtocolVersion=%d\n", vin.prevout.ToStringShort(), nProtocolVersion);
+    //    return false;
+    //}
 
     CScript pubkeyScript;
     pubkeyScript = GetScriptForDestination(pubKeyCollateralAddress.GetID());

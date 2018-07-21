@@ -379,7 +379,9 @@ void CMasternodeSync::ProcessTick()
                 if(netfulfilledman.HasFulfilledRequest(pnode->addr, "masternode-list-sync")) continue;
                 netfulfilledman.AddFulfilledRequest(pnode->addr, "masternode-list-sync");
 
-                if (pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
+                // * Disabled because I want to be in sync with the old version after the actvation of the SPORK 10
+				//if (pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
+				
                 nRequestedMasternodeAttempt++;
 
                 mnodeman.DsegUpdate(pnode);
