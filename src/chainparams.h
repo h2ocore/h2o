@@ -81,6 +81,12 @@ public:
     int FulfilledRequestExpireTime() const { return nFulfilledRequestExpireTime; }
     std::string SporkPubKey() const { return strSporkPubKey; }
     std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
+    //Central Collateral Amount
+    int MasternodeCollateralAmtOld() const { return nMasternodeCollateralAmtOld; }
+    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
+    int MasternodeRewardsOld() const { return nMasternodeRewardsOld; }
+    int MasternodeRewardsNew() const {return nMasternodeRewardsNew; }
+
 protected:
     CChainParams() {}
 
@@ -89,6 +95,8 @@ protected:
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
+    int nMasternodeCollateralAmtOld;
+    int nMasternodeCollateralAmtNew;
     long nMaxTipAge;
     uint64_t nPruneAfterHeight;
     std::vector<CDNSSeedData> vSeeds;
@@ -106,6 +114,8 @@ protected:
     int nFulfilledRequestExpireTime;
     std::string strSporkPubKey;
     std::string strMasternodePaymentsPubKey;
+    int nMasternodeRewardsOld;
+    int nMasternodeRewardsNew;
 };
 
 /**

@@ -763,6 +763,7 @@ public:
     }
 
     void CloseSocketDisconnect();
+    bool DisconnectOldProtocol(int nVersionRequired, std::string strLastCommand = "");
 
     // Denial-of-service detection/prevention
     // The idea is to detect peers that are behaving
@@ -840,7 +841,7 @@ public:
 class CTransaction;
 void RelayTransaction(const CTransaction& tx);
 void RelayTransaction(const CTransaction& tx, const CDataStream& ss);
-void RelayInv(CInv &inv, const int minProtoVersion = MIN_PEER_PROTO_VERSION);
+void RelayInv(CInv &inv, const int minProtoVersion = PROTOCOL_VERSION);
 
 /** Access to the (IP) address database (peers.dat) */
 class CAddrDB

@@ -1768,8 +1768,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         nSubsidy = 180 * COIN; // Step 8
     }else if (nPrevHeight < 10080){
         nSubsidy = 250 * COIN; // Step 9
+    }else if (nPrevHeight < 65000){
+        nSubsidy = 300 * COIN; // Orginal Dev Final Step
     }else{
-        nSubsidy = 300 * COIN; // Final step
+        nSubsidy = 150 * COIN; //Reduce the coins to stabilize the ROI 
     }
     
 
@@ -1784,7 +1786,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
 
-    CAmount ret = blockValue*90/100;
+    CAmount ret = blockValue * ActiveRewards() /100;
 
     return ret;
 }
@@ -5297,16 +5299,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
-        {
-            // disconnect from peers older than this proto version
-            LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
-            pfrom->PushMessage(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
-                               strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION));
-            pfrom->fDisconnect = true;
+        if (pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand))
             return false;
-        }
-
+		
         if (pfrom->nVersion == 10300)
             pfrom->nVersion = 300;
         if (!vRecv.empty())
@@ -5961,6 +5956,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     std::string strError = "invalid header received " + header.GetHash().ToString();
                     return error(strError.c_str());
                 }
+				
+                //disconnect this node if its old protocol version
+                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             }
         }
 
@@ -6051,6 +6049,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 LOCK(cs_main);
                 Misbehaving(pfrom->GetId(), nDoS);
             }
+			
+			//disconnect this node if its old protocol version
+			pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
         }
 
     }
@@ -6319,6 +6320,41 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
     return true;
 }
+
+// Note: whenever a protocol update is needed toggle between both implementations (comment out the formerly active one)
+//       so we can leave the existing clients untouched (old SPORK will stay on so they don't see even older clients). 
+//       Those old clients won't react to the changes of the other (new) SPORK because at the time of their implementation
+//       it was the one which was commented out
+int ActiveProtocol()
+{
+    // SPORK_16 was used for 70209. Leave it 'ON' so they don't see < 70209 nodes. They won't react to SPORK_15
+    // messages because it's not in their code
+    if (sporkManager.IsSporkActive(SPORK_16_PROTOCOL_VER_ENFORCEMENT)) {
+        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+    }
+
+    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+}
+
+
+int ActiveCollateral()
+{
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
+        return Params().MasternodeCollateralAmtNew();
+    }
+
+    return Params().MasternodeCollateralAmtOld();
+}
+
+int ActiveRewards()
+{
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_COLLATERAL_ENFORCEMENT)) {
+        return Params().MasternodeRewardsNew();
+    }
+
+    return Params().MasternodeRewardsOld();
+}
+
 
 // requires LOCK(cs_vRecvMsg)
 bool ProcessMessages(CNode* pfrom)

@@ -223,6 +223,12 @@ bool InitBlockIndex(const CChainParams& chainparams);
 bool LoadBlockIndex();
 /** Unload database information */
 void UnloadBlockIndex();
+/** Return the current protocol version */
+int ActiveProtocol();
+/** Return the current amount of the collateral */
+int ActiveCollateral();
+// Return Active Masternode Rewards
+int ActiveRewards(); 
 /** Process protocol messages received from a given node */
 bool ProcessMessages(CNode* pfrom);
 /**

@@ -108,6 +108,25 @@ bool CActiveMasternode::SendMasternodePing()
         return false;
     }
 
+	// SPORK 15 Check the collateral at every ping
+	{
+        CCoins coins;
+        if(!pcoinsTip->GetCoins(vin.prevout.hash, coins) ||
+           (unsigned int)vin.prevout.n>=coins.vout.size() ||
+           coins.vout[vin.prevout.n].IsNull()) {
+            strNotCapableReason = "Masternode failed to find UTXO";
+            nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
+            LogPrintf("CActiveMasternode::SendMasternodePing -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
+            return false;
+        }
+        if(coins.vout[vin.prevout.n].nValue != ActiveCollateral() * COIN) {
+            strNotCapableReason = "Masternode UTXO wrong collateral amount";
+            nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
+            LogPrintf("CActiveMasternode::SendMasternodePing -- Masternode UTXO should have %d H2O, masternode=%s, vin value = %d\n", ActiveCollateral(), vin.prevout.ToStringShort(), coins.vout[vin.prevout.n].nValue / COIN);
+            return false;
+        }
+	}
+	
     CMasternodePing mnp(vin);
     if(!mnp.Sign(keyMasternode, pubKeyMasternode)) {
         LogPrintf("CActiveMasternode::SendMasternodePing -- ERROR: Couldn't sign Masternode Ping\n");
@@ -210,8 +229,8 @@ void CActiveMasternode::ManageStateInitial()
         return;
     }
 
-    if(pwalletMain->GetBalance() < 1000*COIN) {
-        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < 1000 H2O\n", GetStateString());
+    if(pwalletMain->GetBalance() < ActiveCollateral()*COIN) {
+        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < %d H2O\n", GetStateString(), ActiveCollateral());
         return;
     }
 
