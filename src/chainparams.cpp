@@ -109,7 +109,7 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        vAlertPubKey = ParseHex("045bdcc9e51a8fa56602b6f7c110043dc5224759cabfcfffac8849b114456eb6e7fa1b13a3c67c87387c050502f12985c0d7646ac1993bf6561cc1c94de7c57d59");
+        vAlertPubKey = ParseHex("040c078d37ff10ab634912c7da855df79ae32250305808d3262808059dc32c12087754ad09e7a3e9e8604d9cdbff955dc36a4fbea0175d124c2e9e25d1e381c52e");
         pchMessageStart[0] = 0xa2;
         pchMessageStart[1] = 0xc4;
         pchMessageStart[2] = 0xcb;
@@ -161,8 +161,8 @@ public:
 
         nPoolMaxTransactions        = 3;
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
-        strSporkPubKey              = "042e1556161c046d2f35fa3625e0e27dc07db4c594ddc463f604e9ef871609c7f923ce779538f5d1e97880768be4cbe0bf260b0e017d99d5d1e230f264bd25b90c";
-        strMasternodePaymentsPubKey = "042e1556161c046d2f35fa3625e0e27dc07db4c594ddc463f604e9ef871609c7f923ce779538f5d1e97880768be4cbe0bf260b0e017d99d5d1e230f264bd25b90c";
+        strSporkPubKey              = "04b91bd8d5a471d59ac3f081a2961e2988f9438d3ca36463e5013589d4d95239243c944d8fb7e8823a58e7b528ac186bed63be31afec8617327990620c17111bd0";
+        strMasternodePaymentsPubKey = "04b91bd8d5a471d59ac3f081a2961e2988f9438d3ca36463e5013589d4d95239243c944d8fb7e8823a58e7b528ac186bed63be31afec8617327990620c17111bd0";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
