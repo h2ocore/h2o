@@ -116,13 +116,13 @@ bool CActiveMasternode::SendMasternodePing()
            coins.vout[vin.prevout.n].IsNull()) {
             strNotCapableReason = "Masternode failed to find UTXO";
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
-            LogPrint("masternode", "CActiveMasternode::SendMasternodePing -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
+            LogPrintf("CActiveMasternode::SendMasternodePing -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
         if(coins.vout[vin.prevout.n].nValue != ActiveCollateral() * COIN) {
             strNotCapableReason = "Masternode UTXO wrong collateral amount";
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
-            LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have %d H2O, masternode=%s, vin value = %d\n", ActiveCollateral(), vin.prevout.ToStringShort(), coins.vout[vin.prevout.n].nValue / COIN);
+            LogPrintf("CActiveMasternode::SendMasternodePing -- Masternode UTXO should have %d H2O, masternode=%s, vin value = %d\n", ActiveCollateral(), vin.prevout.ToStringShort(), coins.vout[vin.prevout.n].nValue / COIN);
             return false;
         }
 	}
