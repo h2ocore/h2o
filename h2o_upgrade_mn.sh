@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BINPATH=$(which h2od | sed "s/h2od//g")
-USESYSTEMD=$(systemctl list-unit-files|grep h2od|wc -l)
+USESYSTEMD=$(systemctl list-unit-files|grep h2o|wc -l)
 
 ##---Check if root use may need sudo in some spots
 if [ $(id -u) -ne 0 ]
