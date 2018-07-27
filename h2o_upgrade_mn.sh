@@ -3,32 +3,29 @@
 BINPATH=$(which h2od | sed "s/h2od//g")
 USESYSTEMD=$(systemctl list-unit-files|grep h2o|wc -l)
 
-##---Check if root use may need sudo in some spots
+##---Check if root use may need sudo in some spots and set home path
 if [ $(id -u) -ne 0 ]
 then
   SUDO='sudo'
+  if test -d "$HOME/.h2ocore"; then
+                DATPATH="$HOME/.h2ocore"
+        else
+                echo -e "\nUnable to locate H2O data file path."
+                exit 1
+        fi
 else
+  DATPATH="/root/.h2ocore"
   SUDO=''
 fi
 
-if sudo test -d "/root/.h2ocore"; then
-	DATPATH="/root/.h2ocore"
-else 
-	if test -d "$HOME/.h2ocore"; then
-		DATPATH="$HOME/.h2ocore"
-	else
-		echo -e "\nUnable to locate H2O data file path."
-		exit 1
-	fi
-fi
-
+#generate masternode key and stop h2o node
 if pgrep -x "h2od" > /dev/null
 then
 	MNPKEY=$($BINPATH/h2o-cli masternode genkey)
 	
 	echo "Trying to stop h2o service..."
-
-	if  [ "$USESYSTEMD" -eq "1" ];
+	echo $USESYSTEMD
+	if  [ "$USESYSTEMD" -eq 1 ];
 	then
 		$SUDO systemctl stop h2o
 	else
