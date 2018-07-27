@@ -89,17 +89,17 @@ $SUDO rm -f $DATPATH/peers.dat
 
 $SUDO cp $DATPATH/h2o.conf $DATPATH/h2o.conf.$(date +%Y%m%d%H%M%S).saved 
 $SUDO egrep -v "^masternodeprivkey=" $DATPATH/h2o.conf >/tmp/h2o.conf.new
-echo -e "\nmasternodeprivkey=$MNPKEY\n" >>/tmp/h2o.conf.new
+printf "\nmasternodeprivkey=$MNPKEY\n" >>/tmp/h2o.conf.new
 $SUDO mv -f /tmp/h2o.conf.new $DATPATH/h2o.conf
 
-echo -e "************************************************************************"
-echo -e "***"
-echo -e "***   A new masternode private key has been generated"
-echo -e "***   Please update your 'masternode.conf' file with this new key:"
-echo -e "***"
-echo -e "***                $MNPKEY"
-echo -e "***"
-echo -e "************************************************************************\n\n"
+printf "\n************************************************************************"
+printf "\n***"
+printf "\n***   A new masternode private key has been generated"
+printf "\n***   Please update your 'masternode.conf' file with this new key:"
+printf "\n***"
+printf "\n***                $MNPKEY"
+printf "\n***"
+printf "\n************************************************************************\n\n"
 
 ##---Restart H2O Masternode
 echo "Trying to restart masternode..."
