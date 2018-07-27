@@ -2,8 +2,14 @@ H2O 0.12.1.7
 
 ===============================
 
-Website: http://
+Website: http://h2ocore.org/ 
+
 http://h2oproject.co (old website, do not use)
+
+Masternode Install Guide: http://h2ocore.org/H2O_CNode.pdf
+
+Masternode Upgrade Guide to Version 0.12.1.7:
+https://docs.google.com/document/d/10WfdK3-z1Ea7ub-uXi4dYhg-ZiZW7uC5it8G04dX-hg/edit
 
 
 Few words about H2O project
