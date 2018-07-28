@@ -30,7 +30,6 @@ then
 		$SUDO systemctl stop h2od
 		$SUDO systemctl stop H2O
 		$SUDO systemctl stop H2OD
-		exit 0
 	else
 		echo "${BINPATH}/h2o-cli stop"
 		$BINPATH/h2o-cli stop
