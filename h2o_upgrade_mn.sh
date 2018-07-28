@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BINPATH=$(which h2od | sed "s/h2od//g")
-USESYSTEMD=$(systemctl list-unit-files|grep h2o|wc -l)
+USESYSTEMD=$(systemctl list-unit-files|grep -i h2o|wc -l)
 
 ##---Check if root use may need sudo in some spots and set home path
 if [ $(id -u) -ne 0 ]
@@ -24,11 +24,15 @@ then
 	MNPKEY=$($BINPATH/h2o-cli masternode genkey)
 	
 	echo "Trying to stop h2o service..."
-	echo $USESYSTEMD
 	if  [ "$USESYSTEMD" -eq 1 ];
 	then
 		$SUDO systemctl stop h2o
+		$SUDO systemctl stop h2od
+		$SUDO systemctl stop H2O
+		$SUDO systemctl stop H2OD
+		exit 0
 	else
+		echo "${BINPATH}/h2o-cli stop"
 		$BINPATH/h2o-cli stop
 	fi
 	
@@ -103,6 +107,9 @@ echo "Trying to restart masternode..."
 if  [ "$USESYSTEMD" -eq "1" ];
 then
     $SUDO systemctl start h2o
+    $SUDO systemctl start h2od
+    $SUDO systemctl start H2O
+    $SUDO systemctl start H2OD
 else
     $BINPATH/h2od
 fi
