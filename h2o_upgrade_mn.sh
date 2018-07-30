@@ -21,36 +21,39 @@ fi
 #generate masternode key and stop h2o node
 if pgrep -x "h2od" > /dev/null
 then
-	MNPKEY=$($BINPATH/h2o-cli masternode genkey)
-	
-	echo "Trying to stop h2o service..."
-	if  [ "$USESYSTEMD" -eq 1 ];
-	then
-		$SUDO systemctl stop h2o
-		$SUDO systemctl stop h2od
-		$SUDO systemctl stop H2O
-		$SUDO systemctl stop H2OD
-	else
-		echo "${BINPATH}/h2o-cli stop"
-		$BINPATH/h2o-cli stop
-	fi
-	
-	sleep 6
+    #MNPKEY=$($BINPATH/h2o-cli masternode genkey)
+    
+    echo "Trying to stop h2o service..."
+#   if  [ "$USESYSTEMD" -eq 1 ];
+    if  [ "$USESYSTEMD" > 0 ];  
+    then
+        SVCNAME=$(systemctl list-unit-files|grep -i h2o|awk '{print $1}'|head -n 1)
+        $SUDO systemctl stop $SVCNAME
+    else
+        echo "${BINPATH}h2o-cli stop"
+        $BINPATH\h2o-cli stop
+    fi
+    
+    sleep 6
 
-	if pgrep -x "h2od" > /dev/null
-	then
-		echo -e "\nCannot stop masternode."
-		echo -e "\nPlease shutdown H2O masternode before installing."
-		echo -e "\nUse the command h2o-cli stop \n\n"
-		exit 1
-	fi
-else
-	MNPKEY=$(egrep "^masternodeprivkey=" $DATPATH/h2o.conf |awk -F '=' '{print $2}')
+    if pgrep -x "h2od" > /dev/null
+    then
+        echo -e "\nCannot stop masternode."
+        echo -e "\nPlease shutdown H2O masternode before installing."
+        echo -e "\nUse the command h2o-cli stop \n\n"
+        exit 1
+    fi
+#else
+    #MNPKEY=$(egrep "^masternodeprivkey=" $DATPATH/h2o.conf |awk -F '=' '{print $2}')
 fi
+
+
+echo "In order to proceed with the installation, please paste Masternode genkey by clicking right mouse button. Once masternode genkey is visible in the terminal please hit ENTER.";
+read MNPKEY
 
 ##---Download new H2O Wallet and uncompress
 echo "Downloading upgraded h2o wallet..."
-wget https://github.com/h2ocore/h2o/releases/download/v0.12.1.7/Linux64-H2O-cli-01217.tgz
+wget -O Linux64-H2O-cli-01217.tgz https://github.com/h2ocore/h2o/releases/download/v0.12.1.7/Linux64-H2O-cli-01217.tgz
 tar -zxf Linux64-H2O-cli-01217.tgz
 rm -f Linux64-H2O-cli-01217.tgz
 
@@ -90,27 +93,28 @@ $SUDO rm -f $DATPATH/peers.dat
 $SUDO cp $DATPATH/h2o.conf $DATPATH/h2o.conf.$(date +%Y%m%d%H%M%S).saved 
 $SUDO egrep -v "^masternodeprivkey=" $DATPATH/h2o.conf >/tmp/h2o.conf.new
 printf "\nmasternodeprivkey=$MNPKEY\n" >>/tmp/h2o.conf.new
+printf "\naddnode=140.82.52.45:13355\naddnode=104.207.145.111:13355\naddnode=108.61.219.28:13355\n\n"
+
 $SUDO mv -f /tmp/h2o.conf.new $DATPATH/h2o.conf
 
-printf "\n************************************************************************"
-printf "\n***"
-printf "\n***   A new masternode private key has been generated"
-printf "\n***   Please update your 'masternode.conf' file with this new key:"
-printf "\n***"
-printf "\n***                $MNPKEY"
-printf "\n***"
-printf "\n************************************************************************\n\n"
+#printf "\n************************************************************************"
+#printf "\n***"
+#printf "\n***   A new masternode private key has been generated"
+#printf "\n***   Please update your 'masternode.conf' file with this new key:"
+#printf "\n***"
+#printf "\n***                $MNPKEY"
+#printf "\n***"
+#printf "\n************************************************************************\n\n"
 
 ##---Restart H2O Masternode
 echo "Trying to restart masternode..."
-if  [ "$USESYSTEMD" -eq "1" ];
+#if  [ "$USESYSTEMD" -eq "1" ];
+if  [ "$USESYSTEMD" > 0 ];
 then
-    $SUDO systemctl start h2o
-    $SUDO systemctl start h2od
-    $SUDO systemctl start H2O
-    $SUDO systemctl start H2OD
+    echo $SVCNAME
+    $SUDO systemctl start $SVCNAME
 else
-    $BINPATH/h2od
+    $BINPATH\h2od
 fi
 
 sleep 3
@@ -130,8 +134,26 @@ then
         echo "H2O Mastenode has been successfully updated"
 else
         echo "H2O masternode Install failed :'( "
+        exit 0
 fi
 
-echo -e "\n\nUse\n\th2o-cli mnsync status\n"
-echo -e "and\n\th2o-cli masternode status\n"
-echo -e "to verify if masternode is active"
+sleep 5
+echo "Syncing...";
+echo "Take a coffee break this will take a few minutes maybe more...";
+until h2o-cli mnsync status | grep -m 1 '"IsSynced": true'; do sleep 5; done > /dev/null 2>&1
+echo "Sync complete. You masternode is running!!";
+
+
+printf "\n************************************************************************"
+printf "\n***"
+printf "\n***   Start your masternode in your collateral wallet."
+printf "\n***   You can do this by clicking start alias"
+printf "\n***   Once started runing h2o-cli masternode status should ouput:"
+printf "\n***   Masternode successfully activated"
+printf "\n***"
+printf "\n***"
+printf "\n************************************************************************\n\n"
+
+printf "\n\nUse\n\th2o-cli mnsync status\n"
+printf "and\n\th2o-cli masternode status\n"
+printf "to verify if masternode is active"
