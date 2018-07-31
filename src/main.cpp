@@ -1768,7 +1768,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         nSubsidy = 180 * COIN; // Step 8
     }else if (nPrevHeight < 10080){
         nSubsidy = 250 * COIN; // Step 9
-    }else if (nPrevHeight < 65000){
+    }else if (nPrevHeight < 70000){
         nSubsidy = 300 * COIN; // Orginal Dev Final Step
     }else{
         nSubsidy = 150 * COIN; //Reduce the coins to stabilize the ROI 
