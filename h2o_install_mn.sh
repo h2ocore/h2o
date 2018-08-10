@@ -55,12 +55,12 @@ echo "externalip=$YOURIP:13355"      >> /$HOME/.h2ocore/h2o.conf
 echo "masternodeprivkey=$MNKEY"      >> /$HOME/.h2ocore/h2o.conf
 echo "masternode=1"                  >> /$HOME/.h2ocore/h2o.conf
 echo " "                             >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=108.61.219.28:13355"   >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=140.82.52.45:13355"    >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=104.207.145.111:13355" >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=80.210.127.1:13355"    >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=80.210.127.2:13355"    >> /$HOME/.h2ocore/h2o.conf
-echo "addnode=80.210.127.3:13355"    >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=108.61.219.28:13355"   >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=140.82.52.45:13355"    >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=104.207.145.111:13355" >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=80.210.127.1:13355"    >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=80.210.127.2:13355"    >> /$HOME/.h2ocore/h2o.conf
+#echo "addnode=80.210.127.3:13355"    >> /$HOME/.h2ocore/h2o.conf
 
 echo "Starting H2O client";
 h2od --daemon

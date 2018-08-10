@@ -21,10 +21,8 @@ fi
 #generate masternode key and stop h2o node
 if pgrep -x "h2od" > /dev/null
 then
-    #MNPKEY=$($BINPATH/h2o-cli masternode genkey)
     
     echo "Trying to stop h2o service..."
-#   if  [ "$USESYSTEMD" -eq 1 ];
     if  [ "$USESYSTEMD" > 0 ];  
     then
         SVCNAME=$(systemctl list-unit-files|grep -i h2o|awk '{print $1}'|head -n 1)
@@ -53,9 +51,9 @@ read MNPKEY
 
 ##---Download new H2O Wallet and uncompress
 echo "Downloading upgraded h2o wallet..."
-wget -O Linux64-H2O-cli-01217.tgz https://github.com/h2ocore/h2o/releases/download/v0.12.1.7/Linux64-H2O-cli-01217.tgz
-tar -zxf Linux64-H2O-cli-01217.tgz
-rm -f Linux64-H2O-cli-01217.tgz
+wget -O Linux64-H2O-cli-01218.tgz https://github.com/h2ocore/h2o/releases/download/v0.12.1.8/Linux64-H2O-cli-01218.tgz
+tar -zxf Linux64-H2O-cli-01218.tgz
+rm -f Linux64-H2O-cli-01218.tgz
 
 ##---Check that files exist
 f1="h2od"
@@ -93,7 +91,9 @@ $SUDO rm -f $DATPATH/peers.dat
 $SUDO cp $DATPATH/h2o.conf $DATPATH/h2o.conf.$(date +%Y%m%d%H%M%S).saved 
 $SUDO egrep -v "^masternodeprivkey=" $DATPATH/h2o.conf >/tmp/h2o.conf.new
 printf "\nmasternodeprivkey=$MNPKEY\n" >>/tmp/h2o.conf.new
-printf "\naddnode=140.82.52.45:13355\naddnode=104.207.145.111:13355\naddnode=108.61.219.28:13355\n\n"
+#printf "\naddnode=140.82.52.45:13355\naddnode=104.207.145.111:13355\naddnode=108.61.219.28:13355\naddnode=149.28.232.198:13355\n"
+#printf "\naddnode=80.210.127.1:13355\naddnode=80.210.127.2:13355\naddnode=80.210.127.3:13355\n\n\"
+
 
 $SUDO mv -f /tmp/h2o.conf.new $DATPATH/h2o.conf
 
