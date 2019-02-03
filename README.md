@@ -1,4 +1,4 @@
-H2O 0.12.1.7
+H2O 0.12.1.8
 
 ===============================
 
@@ -8,8 +8,29 @@ http://h2oproject.co (old website, do not use)
 
 Masternode Install Guide: http://h2ocore.org/H2O_CNode.pdf
 
-Masternode Upgrade Guide to Version 0.12.1.7:
-https://docs.google.com/document/d/10WfdK3-z1Ea7ub-uXi4dYhg-ZiZW7uC5it8G04dX-hg/edit
+Install Script: 
+cd
+wget https://raw.githubusercontent.com/h2ocore/h2o/master/h2o_install_mn.sh
+chmod +x h2o_install_mn.sh
+./h2o_install_mn.sh
+
+Upgrade Script: 
+cd
+wget https://raw.githubusercontent.com/h2ocore/h2o/master/h2o_upgrade_mn.sh
+chmod +x h2o_upgrade_mn.sh
+./h2o_upgrade_mn.sh
+
+
+H2o coin Mining Pools
+ArcPool: https://arcpool.com/explorer/H2O
+Minepool.online: https://ihostmn.com/
+
+
+VPS Suggestions:
+Vultr:       https://goo.gl/3PDyPy
+Linode:    https://goo.gl/xiJj1j
+Google VPS get $300 credit:    https://goo.gl/RuRybL
+ArubaCloud:   https://goo.gl/Es1TzW
 
 
 Few words about H2O project
